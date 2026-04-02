@@ -32,7 +32,8 @@ import {
   Info,
   ShoppingCart,
   Search,
-  Users
+  Users,
+  Menu
 } from "lucide-react";
 import { useState, useEffect, FormEvent, ReactNode } from "react";
 import Lightbox from "yet-another-react-lightbox";
@@ -130,6 +131,8 @@ export default function App() {
   const [promoLightboxIndex, setPromoLightboxIndex] = useState(-1);
   const [showBottomLeftPopup, setShowBottomLeftPopup] = useState(false);
   const [hasShownScrollPopup, setHasShownScrollPopup] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isIntroExpanded, setIsIntroExpanded] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("tajermy-theme", theme);
@@ -581,24 +584,26 @@ export default function App() {
     <div className={`min-h-screen font-sans selection:bg-brand-light selection:text-brand-primary ${theme === "red" ? "theme-red" : theme === "orange" ? "theme-orange" : ""} bg-brand-bg text-brand-ink`}>
       
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-brand-primary backdrop-blur-md border-b border-white/10 px-6 py-4 flex justify-between items-center shadow-lg">
+      <nav className="fixed top-0 w-full z-50 bg-brand-primary backdrop-blur-md border-b border-white/10 px-4 md:px-6 py-4 flex justify-between items-center shadow-lg">
         <div className="flex items-center gap-2">
           <img 
             src="https://ducphuongmedical.com/hinhanh/Chanh/Hinh/logo_tajermy.png" 
             alt="TAJERMY Logo" 
-            className="h-10 w-auto object-contain" 
+            className="h-8 md:h-10 w-auto object-contain" 
             referrerPolicy="no-referrer"
           />
           <div className="flex flex-col leading-none hidden sm:flex">
-            <div className="text-2xl font-bold tracking-tighter text-white">
+            <div className="text-xl md:text-2xl font-bold tracking-tighter text-white">
               TAJERMY<span className="text-brand-accent">.</span>
             </div>
-            <div className="text-[10px] font-medium tracking-widest text-white/70 uppercase">
+            <div className="text-[8px] md:text-[10px] font-medium tracking-widest text-white/70 uppercase">
               B2B Agricultural Export
             </div>
           </div>
         </div>
-        <div className="hidden md:flex gap-2 text-sm font-medium uppercase tracking-wider text-white/80">
+        
+        {/* Desktop Menu */}
+        <div className="hidden lg:flex gap-2 text-sm font-medium uppercase tracking-wider text-white/80">
           <a href="#about" className="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-white transition-all">{t.nav.about}</a>
           <a href="#products" className="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-white transition-all">{t.nav.products}</a>
           <a href="#gallery" className="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-white transition-all">{t.nav.gallery}</a>
@@ -606,8 +611,9 @@ export default function App() {
           <a href="#docs" className="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-white transition-all">{t.nav.docs}</a>
           <a href="#quote" className="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-white transition-all">{t.nav.contact}</a>
         </div>
-        <div className="flex items-center gap-4">
-          <div className="flex items-center bg-white/10 rounded-full p-1 border border-white/10">
+
+        <div className="flex items-center gap-2 md:gap-4">
+          <div className="hidden sm:flex items-center bg-white/10 rounded-full p-1 border border-white/10">
             {(["vi", "en", "fr"] as Language[]).map((lang) => (
               <button
                 key={lang}
@@ -631,15 +637,154 @@ export default function App() {
           </button>
           <a 
             href="#quote" 
-            className="bg-white text-brand-primary px-5 py-2.5 rounded-full text-sm font-bold hover:bg-brand-light transition-all shadow-md"
+            className="hidden sm:block bg-white text-brand-primary px-5 py-2.5 rounded-full text-sm font-bold hover:bg-brand-light transition-all shadow-md"
           >
             {t.nav.getQuote}
           </a>
+          
+          {/* Mobile Menu Toggle */}
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden p-2 text-white hover:bg-white/10 rounded-lg transition-all"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
       </nav>
 
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-0 z-40 bg-brand-primary pt-24 px-6 lg:hidden"
+          >
+            <div className="flex flex-col gap-4 text-center">
+              {[
+                { href: "#about", label: t.nav.about },
+                { href: "#products", label: t.nav.products },
+                { href: "#gallery", label: t.nav.gallery },
+                { href: "#logistics", label: t.nav.logistics },
+                { href: "#docs", label: t.nav.docs },
+                { href: "#quote", label: t.nav.contact },
+              ].map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-2xl font-bold text-white/90 hover:text-white py-2 border-b border-white/10"
+                >
+                  {item.label}
+                </a>
+              ))}
+              <div className="flex justify-center gap-4 mt-8">
+                {(["vi", "en", "fr"] as Language[]).map((lang) => (
+                  <button
+                    key={lang}
+                    onClick={() => setLanguage(lang)}
+                    className={`px-4 py-2 rounded-full text-sm font-bold uppercase transition-all ${language === lang ? "bg-white text-brand-primary shadow-sm" : "text-white/60 border border-white/20"}`}
+                  >
+                    {lang}
+                  </button>
+                ))}
+              </div>
+              <a 
+                href="#quote" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="mt-8 bg-white text-brand-primary px-8 py-4 rounded-full text-lg font-bold shadow-xl"
+              >
+                {t.nav.getQuote}
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      
+      {/* Introduction Video & Text Section */}
+      <section className="pt-24 md:pt-28 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-12">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Video Player */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="relative aspect-video rounded-[2rem] overflow-hidden shadow-2xl bg-black group"
+            >
+              <iframe 
+                src="https://www.youtube.com/embed/DSbs2op6wMw?autoplay=0&rel=0" 
+                title="TAJERMY Introduction Video"
+                className="absolute inset-0 w-full h-full border-0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowFullScreen
+              />
+            </motion.div>
+
+            {/* Intro Text */}
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="flex flex-col"
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-light text-brand-primary text-[10px] font-bold uppercase tracking-widest mb-4 w-fit">
+                <Play size={12} className="fill-brand-primary" /> {t.gallery.videos}
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-brand-ink leading-tight">
+                {t.intro.title}
+              </h2>
+              <p className="text-lg font-medium text-brand-primary mb-6 italic">
+                {t.intro.subtitle}
+              </p>
+              
+              <div className="relative">
+                <div className={`text-brand-muted leading-relaxed space-y-4 transition-all duration-500 overflow-hidden ${isIntroExpanded ? "max-h-[2000px] opacity-100" : "max-h-24 opacity-80"}`}>
+                  <p>{t.intro.description1}</p>
+                  <p>{t.intro.description2}</p>
+                  <p>{t.intro.description3}</p>
+                  
+                  <div className="pt-4">
+                    <h4 className="font-bold text-brand-ink mb-3 flex items-center gap-2">
+                      <CheckCircle2 size={18} className="text-brand-primary" /> {t.intro.whyTitle}
+                    </h4>
+                    <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2">
+                      {[t.intro.why1, t.intro.why2, t.intro.why3, t.intro.why4, t.intro.why5].map((item, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm">
+                          <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-brand-primary flex-shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <p className="font-semibold text-brand-ink pt-4">{t.intro.footer}</p>
+                  <p className="text-brand-primary font-bold">{t.intro.cta}</p>
+                </div>
+                
+                {!isIntroExpanded && (
+                  <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-white to-transparent" />
+                )}
+              </div>
+
+              <button 
+                onClick={() => setIsIntroExpanded(!isIntroExpanded)}
+                className="mt-6 flex items-center gap-2 text-brand-primary font-bold hover:underline group w-fit"
+              >
+                {isIntroExpanded ? t.intro.showLess : t.intro.showMore}
+                <motion.div
+                  animate={{ rotate: isIntroExpanded ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ArrowUp size={18} className={isIntroExpanded ? "" : "rotate-180"} />
+                </motion.div>
+              </button>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Section 1: Hero Section (Split Layout) */}
-      <header className="pt-32 pb-20 px-6 md:px-12 lg:px-24 grid md:grid-cols-2 gap-12 items-center min-h-[90vh]">
+      <header className="pb-12 md:pb-20 px-6 md:px-12 lg:px-24 grid lg:grid-cols-2 gap-8 md:gap-12 items-center min-h-[85vh] lg:min-h-[90vh]">
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -648,7 +793,7 @@ export default function App() {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-light text-brand-primary text-xs font-bold uppercase tracking-widest mb-6">
             <Zap size={14} /> {t.hero.badge}
           </div>
-          <h1 className="text-5xl lg:text-7xl font-bold leading-[1.1] tracking-tight mb-8">
+          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold leading-[1.1] tracking-tight mb-6 md:mb-8">
             {language === "vi" ? (
               <>Giải Pháp <span className="text-brand-primary">Nông Sản Việt</span> Cho Chuỗi Cung Ứng Toàn Cầu</>
             ) : language === "en" ? (
@@ -732,12 +877,12 @@ export default function App() {
                 <Plus size={32} />
               </div>
             </div>
-            <div className="absolute bottom-8 left-8 right-8 bg-white/90 backdrop-blur p-6 rounded-2xl border border-white/20 shadow-xl">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-brand-primary rounded-full flex items-center justify-center text-white font-bold">99%</div>
+            <div className="absolute bottom-4 left-4 right-4 md:bottom-8 md:left-8 md:right-8 bg-white/90 backdrop-blur p-4 md:p-6 rounded-2xl border border-white/20 shadow-xl">
+              <div className="flex items-center gap-3 md:gap-4">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-brand-primary rounded-full flex items-center justify-center text-white font-bold text-sm md:text-base">99%</div>
                 <div>
-                  <div className="font-bold text-brand-ink">{t.hero.deliveryRate}</div>
-                  <div className="text-sm text-brand-muted">{t.hero.deliveryCommit}</div>
+                  <div className="font-bold text-brand-ink text-sm md:text-base">{t.hero.deliveryRate}</div>
+                  <div className="text-[10px] md:text-sm text-brand-muted">{t.hero.deliveryCommit}</div>
                 </div>
               </div>
             </div>
@@ -760,8 +905,8 @@ export default function App() {
       </header>
 
       {/* Section: Giới Thiệu (About Us) */}
-      <section id="about" className="py-24 px-6 bg-white">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+      <section id="about" className="py-16 md:py-24 px-6 bg-white">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
           <div className="order-2 md:order-1">
             <div className="relative">
               <div className="relative aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl mb-4 group cursor-zoom-in" onClick={() => setAboutLightboxIndex(aboutSlideIndex)}>
@@ -977,16 +1122,17 @@ export default function App() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-4xl bg-white rounded-[2.5rem] overflow-hidden shadow-2xl grid md:grid-cols-2"
+              className="relative w-full max-w-4xl max-h-[90vh] bg-white rounded-[2rem] md:rounded-[2.5rem] overflow-hidden shadow-2xl grid md:grid-cols-2 overflow-y-auto md:overflow-y-visible"
             >
               <button 
                 onClick={() => setSelectedProduct(null)}
-                className="absolute top-6 right-6 z-10 w-10 h-10 bg-white/80 backdrop-blur rounded-full flex items-center justify-center text-[#1A1A1A] hover:bg-white transition-colors shadow-lg"
+                className="absolute top-4 right-4 md:top-6 md:right-6 z-20 w-8 h-8 md:w-10 md:h-10 bg-white/80 backdrop-blur rounded-full flex items-center justify-center text-[#1A1A1A] hover:bg-white transition-colors shadow-lg"
               >
-                <X size={20} />
+                <X size={18} className="md:hidden" />
+                <X size={20} className="hidden md:block" />
               </button>
               
-              <div className="aspect-square md:aspect-auto h-full">
+              <div className="aspect-square md:aspect-auto h-64 md:h-full">
                 <img 
                   src={selectedProduct.image} 
                   alt={selectedProduct.name} 
@@ -995,7 +1141,7 @@ export default function App() {
                 />
               </div>
               
-              <div className="p-8 md:p-12 flex flex-col">
+              <div className="p-6 md:p-12 flex flex-col">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-light text-brand-primary text-[10px] font-bold uppercase tracking-widest mb-6 w-fit">
                   {t.products.specs}
                 </div>
@@ -1176,8 +1322,8 @@ export default function App() {
       />
 
       {/* Section 4: Logistics & Operations */}
-      <section id="logistics" className="py-24 bg-brand-primary text-white overflow-hidden relative">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+      <section id="logistics" className="py-16 md:py-24 bg-brand-primary text-white overflow-hidden relative">
+        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
           <div>
             <h2 className="text-4xl font-bold mb-4">{t.logistics.title}</h2>
             <button 
@@ -1585,7 +1731,7 @@ export default function App() {
             initial={{ opacity: 0, x: -100, scale: 0.8 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: -100, scale: 0.8 }}
-            className="fixed bottom-6 left-6 z-[100] w-64 bg-white rounded-2xl shadow-2xl overflow-hidden border border-brand-border"
+            className="hidden md:block fixed bottom-6 left-6 z-[100] w-64 bg-white rounded-2xl shadow-2xl overflow-hidden border border-brand-border"
           >
             <div className="relative aspect-[4/5]">
               <img 
@@ -1760,16 +1906,16 @@ export default function App() {
       </AnimatePresence>
 
       {/* Floating Action Buttons */}
-      <div className="fixed bottom-8 right-8 z-[60] flex flex-col gap-4">
+      <div className="fixed bottom-24 md:bottom-8 right-6 md:right-8 z-[60] flex flex-col gap-3 md:gap-4">
         {/* Zalo Button */}
         <a 
           href="https://zalo.me/0938.062.808" 
           target="_blank" 
           rel="noreferrer"
-          className="w-14 h-14 bg-[#0068FF] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform group relative"
+          className="w-12 h-12 md:w-14 md:h-14 bg-[#0068FF] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform group relative"
         >
-          <span className="font-black text-[10px]">Zalo</span>
-          <span className="absolute right-full mr-3 px-3 py-1 bg-white text-brand-ink text-xs font-bold rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-brand-border">
+          <span className="font-black text-[8px] md:text-[10px]">Zalo</span>
+          <span className="absolute right-full mr-3 px-3 py-1 bg-white text-brand-ink text-xs font-bold rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-brand-border hidden md:block">
             {t.common.chatZalo}
           </span>
         </a>
@@ -1777,10 +1923,11 @@ export default function App() {
         {/* Phone Button */}
         <a 
           href="tel:0938062808" 
-          className="w-14 h-14 bg-brand-primary text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-brand-secondary hover:scale-110 transition-all group relative"
+          className="w-12 h-12 md:w-14 md:h-14 bg-brand-primary text-white rounded-full flex items-center justify-center shadow-2xl hover:bg-brand-secondary hover:scale-110 transition-all group relative"
         >
-          <Phone size={24} />
-          <span className="absolute right-full mr-3 px-3 py-1 bg-white text-brand-ink text-xs font-bold rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-brand-border">
+          <Phone size={20} className="md:hidden" />
+          <Phone size={24} className="hidden md:block" />
+          <span className="absolute right-full mr-3 px-3 py-1 bg-white text-brand-ink text-xs font-bold rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-brand-border hidden md:block">
             {t.common.callHotline}: 0938.062.808
           </span>
         </a>
@@ -1793,9 +1940,10 @@ export default function App() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.5 }}
               onClick={scrollToTop}
-              className="w-14 h-14 bg-white text-[#1A1A1A] border border-[#E5E5E5] rounded-full flex items-center justify-center shadow-2xl hover:bg-[#F9FAFB] transition-colors"
+              className="w-12 h-12 md:w-14 md:h-14 bg-white text-[#1A1A1A] border border-[#E5E5E5] rounded-full flex items-center justify-center shadow-2xl hover:bg-[#F9FAFB] transition-colors"
             >
-              <ArrowUp size={24} />
+              <ArrowUp size={20} className="md:hidden" />
+              <ArrowUp size={24} className="hidden md:block" />
             </motion.button>
           )}
         </AnimatePresence>
@@ -1811,6 +1959,8 @@ export default function App() {
         </a>
       </div>
 
+      {/* Extra space for mobile floating CTA */}
+      <div className="h-24 md:hidden" />
     </div>
   );
 }

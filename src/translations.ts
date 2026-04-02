@@ -197,6 +197,23 @@ export const translations = {
       learnMore: "Tìm hiểu thêm",
       chatZalo: "Chat Zalo",
       callHotline: "Gọi Hotline",
+    },
+    intro: {
+      title: "TAJERMY – Xuất Khẩu Nông Sản Việt Nam Cao Cấp",
+      subtitle: "Từ những vùng đất màu mỡ của Việt Nam đến những thị trường khắt khe nhất thế giới.",
+      description1: "Tại TAJERMY, chúng tôi mang những sản phẩm nông sản Việt Nam tốt nhất đến Châu Âu và Hoa Kỳ với chất lượng và độ tin cậy không thỏa hiệp. Sứ mệnh của chúng tôi là kết nối các đối tác toàn cầu với các mặt hàng xuất khẩu tiêu chuẩn cao, đáng tin cậy được lấy trực tiếp từ các trang trại tốt nhất của Việt Nam.",
+      description2: "Chúng tôi chuyên về các sản phẩm cao cấp như hạt điều, chanh xanh, thanh long và hạt cà phê—được lựa chọn, chế biến và đóng gói cẩn thận để đáp ứng các tiêu chuẩn quốc tế. Mỗi sản phẩm đều phản ánh cam kết của chúng tôi về độ tươi ngon, an toàn và sự xuất sắc nhất quán.",
+      description3: "Với sự tập trung mạnh mẽ vào kiểm soát chất lượng, nguồn cung ứng bền vững và quan hệ đối tác lâu dài, TAJERMY đảm bảo rằng mọi chuyến hàng đều mang lại giá trị, sự tin tưởng và hài lòng. Chúng tôi hiểu kỳ vọng của thị trường toàn cầu và liên tục cải thiện để vượt xa chúng.",
+      whyTitle: "Tại sao chọn TAJERMY",
+      why1: "Sản phẩm nông sản chất lượng cao",
+      why2: "Tiêu chuẩn xuất khẩu nghiêm ngặt cho thị trường EU & Mỹ",
+      why3: "Chuỗi cung ứng đáng tin cậy và giao hàng đúng hạn",
+      why4: "Nguồn cung ứng trực tiếp từ các trang trại Việt Nam đáng tin cậy",
+      why5: "Giá cả cạnh tranh với chất lượng nhất quán",
+      footer: "Hãy hợp tác với TAJERMY ngay hôm nay và nâng tầm nguồn cung của bạn với các mặt hàng xuất khẩu cao cấp của Việt Nam.",
+      cta: "Liên hệ với chúng tôi ngay bây giờ để bắt đầu quan hệ đối tác.",
+      showMore: "Xem thêm",
+      showLess: "Thu gọn"
     }
   },
   en: {
@@ -395,6 +412,23 @@ export const translations = {
       learnMore: "Learn More",
       chatZalo: "Chat Zalo",
       callHotline: "Call Hotline",
+    },
+    intro: {
+      title: "TAJERMY – Premium Vietnamese Agricultural Exports",
+      subtitle: "From Vietnam’s fertile lands to the world’s most demanding markets.",
+      description1: "At TAJERMY, we bring the finest Vietnamese agricultural products to Europe and the United States with uncompromising quality and reliability. Our mission is to connect global partners with trusted, high-standard exports sourced directly from Vietnam’s best farms.",
+      description2: "We specialize in premium products such as cashew nuts, green lemons, dragon fruit, and coffee beans—carefully selected, processed, and packaged to meet international standards. Every product reflects our commitment to freshness, safety, and consistent excellence.",
+      description3: "With a strong focus on quality control, sustainable sourcing, and long-term partnerships, TAJERMY ensures that every shipment delivers value, trust, and satisfaction. We understand the expectations of global markets and continuously improve to exceed them.",
+      whyTitle: "Why Choose TAJERMY",
+      why1: "Premium quality agricultural products",
+      why2: "Strict export standards for EU & US markets",
+      why3: "Reliable supply chain and on-time delivery",
+      why4: "Direct sourcing from trusted Vietnamese farms",
+      why5: "Competitive pricing with consistent quality",
+      footer: "Partner with TAJERMY today and elevate your supply with premium Vietnamese exports.",
+      cta: "Contact us now to start your partnership.",
+      showMore: "Show more",
+      showLess: "Show less"
     }
   },
   fr: {
@@ -593,6 +627,23 @@ export const translations = {
       learnMore: "En savoir plus",
       chatZalo: "Chat Zalo",
       callHotline: "Appeler la Hotline",
+    },
+    intro: {
+      title: "TAJERMY – Exportations Agricoles Vietnamiennes de Qualité Supérieure",
+      subtitle: "Des terres fertiles du Vietnam aux marchés les plus exigeants du monde.",
+      description1: "Chez TAJERMY, nous apportons les meilleurs produits agricoles vietnamiens en Europe et aux États-Unis với une qualité et une fiabilité sans compromis. Notre mission est de connecter les partenaires mondiaux à des exportations fiables và de haut niveau, provenant directement des meilleures fermes du Vietnam.",
+      description2: "Nous nous spécialisons dans des produits de qualité supérieure tels que les noix de cajou, les citrons verts, les fruits du dragon et les grains de café—soigneusement sélectionnés, transformés et emballés pour répondre aux normes internationales. Chaque produit reflète notre engagement envers la fraîcheur, la sécurité et l'excellence constante.",
+      description3: "En mettant l'accent sur le contrôle de la qualité, l'approvisionnement durable et les partenariats à long terme, TAJERMY s'assure que chaque expédition apporte valeur, confiance et satisfaction. Nous comprenons les attentes des marchés mondiaux et nous nous améliorons continuellement pour les dépasser.",
+      whyTitle: "Pourquoi choisir TAJERMY",
+      why1: "Produits agricoles de qualité supérieure",
+      why2: "Normes d'exportation strictes pour les marchés de l'UE et des États-Unis",
+      why3: "Chaîne d'approvisionnement fiable et livraison à temps",
+      why4: "Approvisionnement direct auprès de fermes vietnamiennes de confiance",
+      why5: "Prix compétitifs avec une qualité constante",
+      footer: "Associez-vous à TAJERMY dès aujourd'hui et élevez votre approvisionnement avec des exportations vietnamiennes de qualité supérieure.",
+      cta: "Contactez-nous maintenant pour commencer votre partenariat.",
+      showMore: "Voir plus",
+      showLess: "Réduire"
     }
   }
 };
