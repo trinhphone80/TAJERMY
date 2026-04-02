@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  
+  /* Theme Variables */
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-light: var(--brand-light);
+  --color-brand-bg: var(--brand-bg);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-muted: var(--brand-muted);
+  --color-brand-faint: var(--brand-faint);
+  --color-brand-border: var(--brand-border);
+}
+
+:root {
+  --brand-primary: #064E3B; /* Deep Forest Green */
+  --brand-secondary: #B45309; /* Rich Amber/Gold */
+  --brand-accent: #059669; /* Emerald */
+  --brand-light: #F0FDF4; /* Very Light Green */
+  --brand-bg: #FFFFFF; /* Pure White */
+  --brand-ink: #111827; /* Near Black */
+  --brand-muted: #4B5563; /* Gray 600 */
+  --brand-faint: #9CA3AF; /* Gray 400 */
+  --brand-border: #E5E5E5; /* Gray 200 */
+}
+
+.theme-red {
+  --brand-primary: #991B1B; /* Deep Red */
+  --brand-secondary: #F59E0B; /* Amber */
+  --brand-accent: #DC2626; /* Crimson */
+  --brand-light: #FEF2F2; /* Rose 50 */
+  --brand-bg: #FFFFFF;
+  --brand-ink: #111827;
+  --brand-muted: #4B5563;
+  --brand-faint: #9CA3AF;
+  --brand-border: #F3F4F6;
+}
+
+.theme-orange {
+  --brand-primary: #C2410C; /* Deep Orange */
+  --brand-secondary: #0D9488; /* Teal */
+  --brand-accent: #EA580C; /* Orange 600 */
+  --brand-light: #FFF7ED; /* Orange 50 */
+  --brand-bg: #FFFFFF;
+  --brand-ink: #111827;
+  --brand-muted: #4B5563;
+  --brand-faint: #9CA3AF;
+  --brand-border: #F3F4F6;
+}
+
+@layer utilities {
+  .animate-spin-slow {
+    animation: spin 3s linear infinite;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-brand-bg text-brand-ink;
+    font-family: 'Inter', sans-serif;
+  }
+}
