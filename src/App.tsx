@@ -710,7 +710,7 @@ export default function App() {
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="relative aspect-video rounded-[2rem] overflow-hidden shadow-2xl bg-black group"
+              className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl bg-black group"
             >
               <iframe 
                 src="https://www.youtube.com/embed/DSbs2op6wMw?autoplay=0&rel=0" 
@@ -784,7 +784,7 @@ export default function App() {
       </section>
 
       {/* Section 1: Hero Section (Split Layout) */}
-      <header className="pb-12 md:pb-20 px-6 md:px-12 lg:px-24 grid lg:grid-cols-2 gap-8 md:gap-12 items-center min-h-[85vh] lg:min-h-[90vh]">
+      <header className="pb-12 md:pb-20 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 md:gap-12 items-center min-h-[85vh] lg:min-h-[90vh]">
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
