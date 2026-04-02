@@ -180,6 +180,17 @@ export default function App() {
     };
   }, []);
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMobileMenuOpen]);
+
   const t = translations[language];
 
   const PRODUCTS = [
@@ -581,7 +592,7 @@ export default function App() {
   }
 
   return (
-    <div className={`min-h-screen font-sans selection:bg-brand-light selection:text-brand-primary ${theme === "red" ? "theme-red" : theme === "orange" ? "theme-orange" : ""} bg-brand-bg text-brand-ink`}>
+    <div className={`min-h-screen overflow-x-hidden font-sans selection:bg-brand-light selection:text-brand-primary ${theme === "red" ? "theme-red" : theme === "orange" ? "theme-orange" : ""} bg-brand-bg text-brand-ink`}>
       
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-brand-primary backdrop-blur-md border-b border-white/10 px-4 md:px-6 py-4 flex justify-between items-center shadow-lg">
@@ -592,11 +603,11 @@ export default function App() {
             className="h-8 md:h-10 w-auto object-contain" 
             referrerPolicy="no-referrer"
           />
-          <div className="flex flex-col leading-none hidden sm:flex">
-            <div className="text-xl md:text-2xl font-bold tracking-tighter text-white">
+          <div className="flex flex-col leading-none">
+            <div className="text-lg md:text-2xl font-bold tracking-tighter text-white">
               TAJERMY<span className="text-brand-accent">.</span>
             </div>
-            <div className="text-[8px] md:text-[10px] font-medium tracking-widest text-white/70 uppercase">
+            <div className="text-[7px] md:text-[10px] font-medium tracking-widest text-white/70 uppercase">
               B2B Agricultural Export
             </div>
           </div>
@@ -645,7 +656,8 @@ export default function App() {
           {/* Mobile Menu Toggle */}
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-white hover:bg-white/10 rounded-lg transition-all"
+            className="lg:hidden w-10 h-10 flex items-center justify-center text-white bg-white/10 hover:bg-white/20 rounded-xl transition-all active:scale-90"
+            aria-label="Toggle Menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -655,62 +667,126 @@ export default function App() {
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-brand-primary pt-24 px-6 lg:hidden"
-          >
-            <div className="flex flex-col gap-4 text-center">
-              {[
-                { href: "#about", label: t.nav.about },
-                { href: "#products", label: t.nav.products },
-                { href: "#gallery", label: t.nav.gallery },
-                { href: "#logistics", label: t.nav.logistics },
-                { href: "#docs", label: t.nav.docs },
-                { href: "#quote", label: t.nav.contact },
-              ].map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm lg:hidden"
+            />
+            
+            {/* Menu Content */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed right-0 top-0 bottom-0 w-[85%] max-w-sm z-[70] bg-brand-primary shadow-2xl lg:hidden flex flex-col"
+            >
+              <div className="p-6 flex justify-between items-center border-b border-white/10">
+                <div className="flex flex-col leading-none">
+                  <div className="text-xl font-bold tracking-tighter text-white">
+                    TAJERMY<span className="text-brand-accent">.</span>
+                  </div>
+                  <div className="text-[8px] font-medium tracking-widest text-white/50 uppercase mt-1">
+                    B2B Agricultural Export
+                  </div>
+                </div>
+                <button 
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-2xl font-bold text-white/90 hover:text-white py-2 border-b border-white/10"
+                  className="p-2 text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-all"
                 >
-                  {item.label}
-                </a>
-              ))}
-              <div className="flex justify-center gap-4 mt-8">
-                {(["vi", "en", "fr"] as Language[]).map((lang) => (
-                  <button
-                    key={lang}
-                    onClick={() => setLanguage(lang)}
-                    className={`px-4 py-2 rounded-full text-sm font-bold uppercase transition-all ${language === lang ? "bg-white text-brand-primary shadow-sm" : "text-white/60 border border-white/20"}`}
-                  >
-                    {lang}
-                  </button>
-                ))}
+                  <X size={24} />
+                </button>
               </div>
-              <a 
-                href="#quote" 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="mt-8 bg-white text-brand-primary px-8 py-4 rounded-full text-lg font-bold shadow-xl"
-              >
-                {t.nav.getQuote}
-              </a>
-            </div>
-          </motion.div>
+
+              <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-2">
+                {[
+                  { href: "#about", label: t.nav.about, icon: <Info size={20} /> },
+                  { href: "#products", label: t.nav.products, icon: <Package size={20} /> },
+                  { href: "#gallery", label: t.nav.gallery, icon: <ImageIcon size={20} /> },
+                  { href: "#logistics", label: t.nav.logistics, icon: <Truck size={20} /> },
+                  { href: "#docs", label: t.nav.docs, icon: <FileText size={20} /> },
+                  { href: "#quote", label: t.nav.contact, icon: <Mail size={20} /> },
+                ].map((item, idx) => (
+                  <motion.a
+                    key={item.href}
+                    href={item.href}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + idx * 0.05 }}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center gap-4 text-xl font-semibold text-white/90 hover:text-white p-4 rounded-2xl hover:bg-white/5 transition-all active:scale-95"
+                  >
+                    <span className="text-brand-accent">{item.icon}</span>
+                    {item.label}
+                  </motion.a>
+                ))}
+
+                <div className="mt-8 pt-8 border-t border-white/10 space-y-6">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-widest text-white/40 mb-4 px-4">{t.nav.changeTheme}</p>
+                    <div className="flex gap-3 px-4">
+                      {(["green", "red", "orange"] as const).map((tName) => (
+                        <button
+                          key={tName}
+                          onClick={() => setTheme(tName)}
+                          className={`w-10 h-10 rounded-xl border-2 transition-all flex items-center justify-center ${theme === tName ? "border-brand-accent bg-white/10 scale-110" : "border-white/10 hover:border-white/30"}`}
+                        >
+                          <div className={`w-4 h-4 rounded-full ${tName === "green" ? "bg-green-500" : tName === "red" ? "bg-red-500" : "bg-orange-500"}`} />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-widest text-white/40 mb-4 px-4">Language</p>
+                    <div className="flex gap-2 px-4">
+                      {(["vi", "en", "fr"] as Language[]).map((lang) => (
+                        <button
+                          key={lang}
+                          onClick={() => setLanguage(lang)}
+                          className={`flex-1 py-3 rounded-xl text-sm font-bold uppercase transition-all border ${language === lang ? "bg-white text-brand-primary border-white" : "text-white/60 border-white/10 hover:border-white/30"}`}
+                        >
+                          {lang}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-6 border-t border-white/10 bg-black/10">
+                <a 
+                  href="#quote" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full bg-white text-brand-primary py-4 rounded-2xl text-lg font-bold shadow-xl active:scale-[0.98] transition-transform"
+                >
+                  <Zap size={20} className="fill-brand-primary" />
+                  {t.nav.getQuote}
+                </a>
+                <div className="mt-4 flex justify-center gap-6 text-white/40">
+                  <Phone size={20} />
+                  <Mail size={20} />
+                  <Globe size={20} />
+                </div>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
       
       {/* Introduction Video & Text Section */}
       <section className="pt-24 md:pt-28 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-12">
+        <div className="max-w-7xl mx-auto px-4 md:px-12 lg:px-24 py-12">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Video Player */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl bg-black group"
+              className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl bg-black group"
             >
               <iframe 
                 src="https://www.youtube.com/embed/DSbs2op6wMw?autoplay=0&rel=0" 
@@ -784,7 +860,7 @@ export default function App() {
       </section>
 
       {/* Section 1: Hero Section (Split Layout) */}
-      <header className="pb-12 md:pb-20 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 md:gap-12 items-center min-h-[85vh] lg:min-h-[90vh]">
+      <header className="pb-12 md:pb-20 px-4 md:px-12 lg:px-24 max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 md:gap-12 items-center min-h-[85vh] lg:min-h-[90vh]">
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -858,7 +934,7 @@ export default function App() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative"
         >
-          <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl mb-4 group cursor-zoom-in" onClick={() => setHeroLightboxIndex(heroSlideIndex)}>
+          <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl mb-4 group cursor-zoom-in" onClick={() => setHeroLightboxIndex(heroSlideIndex)}>
             <AnimatePresence mode="wait">
               <motion.img 
                 key={heroSlideIndex}
@@ -895,7 +971,7 @@ export default function App() {
                   setHeroSlideIndex(idx);
                   setHeroLightboxIndex(idx);
                 }}
-                className={`relative shrink-0 w-24 h-18 rounded-xl overflow-hidden border-2 transition-all ${heroSlideIndex === idx ? "border-brand-primary scale-105 shadow-md" : "border-transparent opacity-60 hover:opacity-100"}`}
+                className={`relative shrink-0 w-24 h-16 rounded-xl overflow-hidden border-2 transition-all ${heroSlideIndex === idx ? "border-brand-primary scale-105 shadow-md" : "border-transparent opacity-60 hover:opacity-100"}`}
               >
                 <img src={img} alt={`Thumb ${idx + 1}`} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
               </button>
@@ -905,11 +981,11 @@ export default function App() {
       </header>
 
       {/* Section: Giới Thiệu (About Us) */}
-      <section id="about" className="py-16 md:py-24 px-6 bg-white">
+      <section id="about" className="py-16 md:py-24 px-4 md:px-12 lg:px-24 bg-white">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
           <div className="order-2 md:order-1">
             <div className="relative">
-              <div className="relative aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl mb-4 group cursor-zoom-in" onClick={() => setAboutLightboxIndex(aboutSlideIndex)}>
+              <div className="relative aspect-video rounded-[2.5rem] overflow-hidden shadow-2xl mb-4 group cursor-zoom-in" onClick={() => setAboutLightboxIndex(aboutSlideIndex)}>
                 <AnimatePresence mode="wait">
                   <motion.img 
                     key={aboutSlideIndex}
@@ -941,7 +1017,7 @@ export default function App() {
                       setAboutSlideIndex(idx);
                       setAboutLightboxIndex(idx);
                     }}
-                    className={`relative shrink-0 w-24 h-18 rounded-xl overflow-hidden border-2 transition-all ${aboutSlideIndex === idx ? "border-brand-primary scale-105 shadow-md" : "border-transparent opacity-60 hover:opacity-100"}`}
+                    className={`relative shrink-0 w-24 h-16 rounded-xl overflow-hidden border-2 transition-all ${aboutSlideIndex === idx ? "border-brand-primary scale-105 shadow-md" : "border-transparent opacity-60 hover:opacity-100"}`}
                   >
                     <img src={img} alt={`Thumb ${idx + 5}`} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                   </button>
@@ -1323,7 +1399,7 @@ export default function App() {
 
       {/* Section 4: Logistics & Operations */}
       <section id="logistics" className="py-16 md:py-24 bg-brand-primary text-white overflow-hidden relative">
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
+        <div className="max-w-7xl mx-auto px-4 md:px-12 lg:px-24 grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
           <div>
             <h2 className="text-4xl font-bold mb-4">{t.logistics.title}</h2>
             <button 
@@ -1383,7 +1459,7 @@ export default function App() {
               </div>
             </div>
           </div>
-          <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
+          <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
             <AnimatePresence mode="wait">
               <motion.img
                 key={logisticsSlideIndex}

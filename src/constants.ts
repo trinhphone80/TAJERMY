@@ -32,10 +32,5 @@ export const INITIAL_PHOTOS: Photo[] = [
 ];
 
 export const INITIAL_VIDEOS: Video[] = [
-  { id: "v1", url: "https://www.youtube.com/watch?v=xuSoneXQDs8", thumbnail: "https://img.youtube.com/vi/xuSoneXQDs8/hqdefault.jpg", title: "Quy trình sản xuất 1" },
-  { id: "v2", url: "https://www.youtube.com/watch?v=W4-wu2M_XPM", thumbnail: "https://img.youtube.com/vi/W4-wu2M_XPM/hqdefault.jpg", title: "Quy trình sản xuất 2" },
-  { id: "v3", url: "https://www.youtube.com/watch?v=P3VVmn3vQvA", thumbnail: "https://img.youtube.com/vi/P3VVmn3vQvA/hqdefault.jpg", title: "Quy trình sản xuất 3" },
-  { id: "v4", url: "https://www.youtube.com/watch?v=sMj5HvH1Mws", thumbnail: "https://img.youtube.com/vi/sMj5HvH1Mws/hqdefault.jpg", title: "Quy trình sản xuất 4" },
-  { id: "v5", url: "https://www.youtube.com/watch?v=8e6SYZxk9Zk", thumbnail: "https://img.youtube.com/vi/8e6SYZxk9Zk/hqdefault.jpg", title: "Quy trình sản xuất 5" },
-  { id: "v6", url: "https://www.youtube.com/watch?v=kwm7YRxPjLU", thumbnail: "https://img.youtube.com/vi/kwm7YRxPjLU/hqdefault.jpg", title: "Quy trình sản xuất 6" },
+  { id: "v1", url: "https://www.youtube.com/watch?v=DSbs2op6wMw", thumbnail: "https://img.youtube.com/vi/DSbs2op6wMw/hqdefault.jpg", title: "TAJERMY Introduction" },
 ];
