@@ -58,6 +58,28 @@ export const translations = {
       statsQuality: "Đạt chuẩn kiểm định",
       yearsExp: "Năm kinh nghiệm trong ngành xuất khẩu nông sản",
     },
+    cashewTesta: {
+      badge: "Sản phẩm mới",
+      title: "VỎ LỤA HẠT ĐIỀU – GIẢI PHÁP NGUYÊN LIỆU HIỆU QUẢ CHO NGÀNH THỰC PHẨM & CHĂN NUÔI",
+      description1: "Vỏ lụa hạt điều là phần vỏ mỏng bao quanh nhân điều, được tận dụng như một nguồn nguyên liệu giá trị cao trong sản xuất thức ăn chăn nuôi và chế biến gia vị thực phẩm.",
+      description2: "Sản phẩm do TAJERMY phân phối được sơ chế bằng hệ thống máy móc hiện đại, đảm bảo độ sạch, độ đồng đều và chất lượng ổn định trong từng lô hàng.",
+      description3: "Với công suất cung ứng trên 1000 tấn/tháng, chúng tôi đáp ứng tốt nhu cầu lớn từ các nhà máy trong và ngoài nước.",
+      description4: "Vỏ lụa được kiểm soát chặt chẽ về chất lượng: không tạp chất, không mối mọt, không ẩm mốc, đảm bảo an toàn trong quá trình sử dụng.",
+      description5: "Sản phẩm hiện đang được xuất khẩu ổn định sang các thị trường lớn như Hàn Quốc, Ấn Độ, và nhiều đối tác quốc tế khác.",
+      appsTitle: "Ứng dụng chính:",
+      apps: [
+        "Trộn thức ăn chăn nuôi",
+        "Nguyên liệu chế biến gia vị",
+        "Phụ phẩm tái chế trong ngành thực phẩm"
+      ],
+      commitTitle: "Cam kết từ TAJERMY:",
+      commitments: [
+        "Nguồn cung ổn định, lâu dài",
+        "Chất lượng đồng nhất",
+        "Giá cả cạnh tranh",
+        "Hỗ trợ xuất khẩu chuyên nghiệp"
+      ]
+    },
     trust: {
       title: "Chứng nhận chất lượng quốc tế & Kiểm định thực vật",
     },
@@ -273,6 +295,28 @@ export const translations = {
       statsQuality: "Quality Certified",
       yearsExp: "Years of experience in agricultural export",
     },
+    cashewTesta: {
+      badge: "New Product",
+      title: "CASHEW TESTA – A COST-EFFECTIVE INGREDIENT FOR FOOD & FEED INDUSTRIES",
+      description1: "Cashew testa is the thin skin covering cashew kernels, widely utilized as a valuable raw material in animal feed production and food seasoning processing.",
+      description2: "Distributed by TAJERMY, the product is processed using modern machinery systems, ensuring cleanliness, uniformity, and consistent quality in every batch.",
+      description3: "With a supply capacity of over 1,000 tons per month, we are capable of meeting large-scale demands from domestic and international manufacturers.",
+      description4: "The cashew testa is strictly quality-controlled: free from impurities, pests, and mold, ensuring safety during usage.",
+      description5: "The product is consistently exported to major markets such as South Korea, India, and other international partners.",
+      appsTitle: "Main Applications:",
+      apps: [
+        "Animal feed mixing",
+        "Ingredient for seasoning production",
+        "Recycled by-product in the food industry"
+      ],
+      commitTitle: "TAJERMY Commitment:",
+      commitments: [
+        "Stable and long-term supply",
+        "Consistent quality",
+        "Competitive pricing",
+        "Professional export support"
+      ]
+    },
     trust: {
       title: "International Quality Certifications & Phytosanitary Inspection",
     },
@@ -487,6 +531,28 @@ export const translations = {
       statsMarkets: "Marchés d'exportation",
       statsQuality: "Qualité Certifiée",
       yearsExp: "Années d'expérience en export agricole",
+    },
+    cashewTesta: {
+      badge: "Nouveau produit",
+      title: "PELLICULE DE NOIX DE CAJOU – UN INGRÉDIENT RENTABLE POUR LES INDUSTRIES ALIMENTAIRES ET ALIMENTATION ANIMALE",
+      description1: "La pellicule de noix de cajou est la fine peau recouvrant les amandes de cajou, largement utilisée comme matière première précieuse dans la production d'aliments pour animaux et le traitement des assaisonnements alimentaires.",
+      description2: "Distribué par TAJERMY, le produit est traité à l'aide de systèmes de machines modernes, garantissant la propreté, l'uniformité et une qualité constante dans chaque lot.",
+      description3: "Avec une capacité d'approvisionnement de plus de 1 000 tonnes par mois, nous sommes capables de répondre aux demandes à grande échelle des fabricants nationaux et internationaux.",
+      description4: "La pellicule de noix de cajou est strictement contrôlée en qualité : exempte d'impuretés, de parasites et de moisissures, garantissant la sécurité lors de l'utilisation.",
+      description5: "Le produit est régulièrement exporté vers des marchés majeurs tels que la Corée du Sud, l'Inde et d'autres partenaires internationaux.",
+      appsTitle: "Applications principales :",
+      apps: [
+        "Mélange d'aliments pour animaux",
+        "Ingrédient pour la production d'assaisonnements",
+        "Sous-produit recyclé dans l'industrie alimentaire"
+      ],
+      commitTitle: "Engagement TAJERMY :",
+      commitments: [
+        "Approvisionnement stable et à long terme",
+        "Qualité constante",
+        "Prix compétitif",
+        "Soutien professionnel à l'exportation"
+      ]
     },
     trust: {
       title: "Certifications de Qualité Internationales & Inspection Phytosanitaire",

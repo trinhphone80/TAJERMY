@@ -96,6 +96,7 @@ export default function App() {
   const [lightboxIndex, setLightboxIndex] = useState(-1);
   const [heroLightboxIndex, setHeroLightboxIndex] = useState(-1);
   const [aboutLightboxIndex, setAboutLightboxIndex] = useState(-1);
+  const [cashewLightboxIndex, setCashewLightboxIndex] = useState(-1);
   const [heroSlideIndex, setHeroSlideIndex] = useState(0);
   const [aboutSlideIndex, setAboutSlideIndex] = useState(0);
   const [logisticsSlideIndex, setLogisticsSlideIndex] = useState(0);
@@ -1120,6 +1121,122 @@ export default function App() {
         </div>
       </section>
 
+      {/* Section 2.5: Cashew Testa Special Product */}
+      <section className="py-24 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-4">
+                  <div 
+                    className="rounded-[2rem] overflow-hidden shadow-2xl aspect-[3/4] cursor-zoom-in"
+                    onClick={() => setCashewLightboxIndex(0)}
+                  >
+                    <img 
+                      src="https://ducphuongmedical.com/hinhanh/HatDieu/tajermy1.jpg" 
+                      alt="Cashew Testa 1" 
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                  <div className="bg-brand-primary rounded-[2rem] p-8 text-white">
+                    <div className="text-4xl font-bold mb-2">1000+</div>
+                    <div className="text-sm font-medium opacity-80 uppercase tracking-widest">{t.about.statsMarkets}</div>
+                  </div>
+                </div>
+                <div className="pt-12 space-y-4">
+                  <div className="bg-brand-accent rounded-[2rem] p-8 text-white">
+                    <div className="text-4xl font-bold mb-2">100%</div>
+                    <div className="text-sm font-medium opacity-80 uppercase tracking-widest">{t.about.statsQuality}</div>
+                  </div>
+                  <div 
+                    className="rounded-[2rem] overflow-hidden shadow-2xl aspect-[3/4] cursor-zoom-in"
+                    onClick={() => setCashewLightboxIndex(1)}
+                  >
+                    <img 
+                      src="https://ducphuongmedical.com/hinhanh/HatDieu/tajermy2.jpg" 
+                      alt="Cashew Testa 2" 
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                </div>
+              </div>
+              
+              {/* Decorative elements */}
+              <div className="absolute -z-10 -top-10 -left-10 w-40 h-40 bg-brand-light rounded-full blur-3xl opacity-50" />
+              <div className="absolute -z-10 -bottom-10 -right-10 w-60 h-60 bg-brand-accent/10 rounded-full blur-3xl opacity-50" />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-8"
+            >
+              <div>
+                <span className="inline-block px-4 py-1.5 rounded-full bg-brand-light text-brand-primary text-xs font-bold uppercase tracking-widest mb-6">
+                  {t.cashewTesta.badge}
+                </span>
+                <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6 leading-tight">
+                  {t.cashewTesta.title}
+                </h2>
+                <div className="space-y-4 text-brand-muted leading-relaxed">
+                  <p>{t.cashewTesta.description1}</p>
+                  <p>{t.cashewTesta.description2}</p>
+                  <p>{t.cashewTesta.description3}</p>
+                  <p>{t.cashewTesta.description4}</p>
+                  <p>{t.cashewTesta.description5}</p>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="bg-brand-light/30 p-6 rounded-3xl border border-brand-border">
+                  <h3 className="font-bold text-brand-primary mb-4 flex items-center gap-2">
+                    <Zap size={18} /> {t.cashewTesta.appsTitle}
+                  </h3>
+                  <ul className="space-y-2">
+                    {t.cashewTesta.apps.map((app, i) => (
+                      <li key={i} className="text-sm text-brand-muted flex items-start gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-brand-accent mt-1.5 shrink-0" />
+                        {app}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="bg-brand-light/30 p-6 rounded-3xl border border-brand-border">
+                  <h3 className="font-bold text-brand-primary mb-4 flex items-center gap-2">
+                    <ShieldCheck size={18} /> {t.cashewTesta.commitTitle}
+                  </h3>
+                  <ul className="space-y-2">
+                    {t.cashewTesta.commitments.map((commit, i) => (
+                      <li key={i} className="text-sm text-brand-muted flex items-start gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-brand-accent mt-1.5 shrink-0" />
+                        {commit}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="pt-4">
+                <a 
+                  href="#quote" 
+                  className="inline-flex items-center gap-2 bg-brand-primary text-white px-8 py-4 rounded-2xl font-bold hover:bg-brand-accent transition-all shadow-lg hover:shadow-brand-primary/20 active:scale-95"
+                >
+                  {t.hero.ctaQuote} <ArrowRight size={20} />
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Section 3: Product Catalog */}
       <section id="products" className="py-24 px-6 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
@@ -1360,6 +1477,18 @@ export default function App() {
         open={aboutLightboxIndex >= 0}
         close={() => setAboutLightboxIndex(-1)}
         slides={ABOUT_BANNER_IMAGES.map(src => ({ src }))}
+        plugins={[Thumbnails]}
+      />
+
+      {/* Cashew Testa Lightbox */}
+      <Lightbox
+        index={cashewLightboxIndex}
+        open={cashewLightboxIndex >= 0}
+        close={() => setCashewLightboxIndex(-1)}
+        slides={[
+          { src: "https://ducphuongmedical.com/hinhanh/HatDieu/tajermy1.jpg" },
+          { src: "https://ducphuongmedical.com/hinhanh/HatDieu/tajermy2.jpg" }
+        ]}
         plugins={[Thumbnails]}
       />
 
