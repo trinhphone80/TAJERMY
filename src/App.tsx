@@ -1584,31 +1584,89 @@ export default function App() {
         }}
       />
 
-      {/* Catalogue Lightbox */}
-      <Lightbox
-        open={catalogueOpen}
-        close={() => setCatalogueOpen(false)}
-        slides={[{ type: "pdf", src: "https://ducphuongmedical.com/hinhanh/Catalogue/TAJERMY_Catalogue_2026.pdf" } as any]}
-        render={{
-          slide: ({ slide }) => {
-            if ((slide as any).type === "pdf") {
-              const pdfUrl = (slide as any).src;
-              const viewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(pdfUrl)}&embedded=true`;
-              return (
-                <div className="w-full h-full flex items-center justify-center p-2 md:p-12">
-                  <iframe
-                    className="w-full h-full max-w-6xl bg-white rounded-xl shadow-2xl"
-                    src={viewerUrl}
-                    title="TAJERMY Catalogue 2026"
-                    frameBorder="0"
-                  />
+      {/* Catalogue PDF Viewer Modal */}
+      <AnimatePresence>
+        {catalogueOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 md:p-8"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative w-full h-full max-w-7xl bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col"
+            >
+              {/* Modal Header */}
+              <div className="flex items-center justify-between p-4 md:p-6 border-bottom border-gray-100 bg-white">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-brand-light rounded-xl flex items-center justify-center text-brand-primary">
+                    <FileText size={24} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-brand-ink">{t.gallery.catalogueTitle}</h3>
+                    <p className="text-xs text-brand-muted uppercase tracking-widest font-bold">TAJERMY 2026 Edition</p>
+                  </div>
                 </div>
-              );
-            }
-            return undefined;
-          }
-        }}
-      />
+                <div className="flex items-center gap-2">
+                  <a 
+                    href="https://ducphuongmedical.com/hinhanh/Catalogue/TAJERMY_Catalogue_2026.pdf" 
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="p-2 hover:bg-gray-100 rounded-lg text-brand-muted hover:text-brand-primary transition-colors"
+                    title="Open in New Tab"
+                  >
+                    <Globe size={20} />
+                  </a>
+                  <button 
+                    onClick={() => setCatalogueOpen(false)}
+                    className="p-2 hover:bg-gray-100 rounded-lg text-brand-muted hover:text-brand-ink transition-colors"
+                  >
+                    <X size={24} />
+                  </button>
+                </div>
+              </div>
+
+              {/* PDF Viewer Content */}
+              <div className="flex-1 bg-gray-100 relative overflow-hidden">
+                <iframe
+                  src={`https://docs.google.com/gview?url=${encodeURIComponent("https://ducphuongmedical.com/hinhanh/Catalogue/TAJERMY_Catalogue_2026.pdf")}&embedded=true`}
+                  className="w-full h-full border-none"
+                  title="TAJERMY Catalogue 2026 Viewer"
+                />
+                
+                {/* Fallback / Loading Hint */}
+                <div className="absolute inset-0 -z-10 flex flex-col items-center justify-center text-brand-muted p-6 text-center">
+                  <div className="w-16 h-16 border-4 border-brand-primary/20 border-t-brand-primary rounded-full animate-spin mb-4" />
+                  <p className="font-medium">Loading Catalogue...</p>
+                  <p className="text-sm max-w-xs mt-2">If the viewer doesn't load, please click the button below to open directly.</p>
+                  <a 
+                    href="https://ducphuongmedical.com/hinhanh/Catalogue/TAJERMY_Catalogue_2026.pdf" 
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="mt-6 px-6 py-3 bg-brand-primary text-white rounded-xl font-bold shadow-lg"
+                  >
+                    View PDF Directly
+                  </a>
+                </div>
+              </div>
+
+              {/* Modal Footer */}
+              <div className="p-4 bg-white border-top border-gray-100 flex justify-center">
+                <a 
+                  href="https://ducphuongmedical.com/hinhanh/Catalogue/TAJERMY_Catalogue_2026.pdf" 
+                  download
+                  className="flex items-center gap-2 text-brand-primary font-bold hover:underline"
+                >
+                  <Download size={18} /> Download for Offline Reading
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Section 4: Logistics & Operations */}
       <section id="logistics" className="py-16 md:py-24 bg-brand-primary text-white overflow-hidden relative">
