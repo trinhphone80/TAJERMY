@@ -28,6 +28,7 @@ import {
   Eye,
   Phone,
   ArrowUp,
+  Download,
   Lock,
   Info,
   ShoppingCart,
@@ -97,6 +98,7 @@ export default function App() {
   const [heroLightboxIndex, setHeroLightboxIndex] = useState(-1);
   const [aboutLightboxIndex, setAboutLightboxIndex] = useState(-1);
   const [cashewLightboxIndex, setCashewLightboxIndex] = useState(-1);
+  const [catalogueOpen, setCatalogueOpen] = useState(false);
   const [heroSlideIndex, setHeroSlideIndex] = useState(0);
   const [aboutSlideIndex, setAboutSlideIndex] = useState(0);
   const [logisticsSlideIndex, setLogisticsSlideIndex] = useState(0);
@@ -614,15 +616,15 @@ export default function App() {
           </div>
         </div>
         
-        {/* Desktop Menu */}
-        <div className="hidden lg:flex gap-2 text-sm font-medium uppercase tracking-wider text-white/80">
-          <a href="#about" className="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-white transition-all">{t.nav.about}</a>
-          <a href="#products" className="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-white transition-all">{t.nav.products}</a>
-          <a href="#gallery" className="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-white transition-all">{t.nav.gallery}</a>
-          <a href="#logistics" className="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-white transition-all">{t.nav.logistics}</a>
-          <a href="#docs" className="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-white transition-all">{t.nav.docs}</a>
-          <a href="#quote" className="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-white transition-all">{t.nav.contact}</a>
-        </div>
+          <div className="hidden lg:flex gap-2 text-sm font-medium uppercase tracking-wider text-white/80">
+            <a href="#video-gallery" className="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-white transition-all">{t.gallery.videos}</a>
+            <a href="#about" className="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-white transition-all">{t.nav.about}</a>
+            <a href="#products" className="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-white transition-all">{t.nav.products}</a>
+            <a href="#photo-gallery" className="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-white transition-all">{t.gallery.photos}</a>
+            <a href="#logistics" className="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-white transition-all">{t.nav.logistics}</a>
+            <a href="#docs" className="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-white transition-all">{t.nav.docs}</a>
+            <a href="#quote" className="px-3 py-2 rounded-lg hover:bg-white/10 hover:text-white transition-all">{t.nav.contact}</a>
+          </div>
 
         <div className="flex items-center gap-2 md:gap-4">
           <div className="hidden sm:flex items-center bg-white/10 rounded-full p-1 border border-white/10">
@@ -705,9 +707,10 @@ export default function App() {
 
               <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-2">
                 {[
+                  { href: "#video-gallery", label: t.gallery.videos, icon: <VideoIcon size={20} /> },
                   { href: "#about", label: t.nav.about, icon: <Info size={20} /> },
                   { href: "#products", label: t.nav.products, icon: <Package size={20} /> },
-                  { href: "#gallery", label: t.nav.gallery, icon: <ImageIcon size={20} /> },
+                  { href: "#photo-gallery", label: t.gallery.photos, icon: <ImageIcon size={20} /> },
                   { href: "#logistics", label: t.nav.logistics, icon: <Truck size={20} /> },
                   { href: "#docs", label: t.nav.docs, icon: <FileText size={20} /> },
                   { href: "#quote", label: t.nav.contact, icon: <Mail size={20} /> },
@@ -980,6 +983,115 @@ export default function App() {
           </div>
         </motion.div>
       </header>
+
+      {/* Section: Video Gallery */}
+      <section id="video-gallery" className="py-24 px-6 bg-[#F9FAFB]">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-16">
+            <h2 className="text-4xl font-bold tracking-tight mb-4">{t.gallery.videoTitle}</h2>
+            <p className="text-brand-muted max-w-2xl">{t.gallery.subtitle}</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {videos.map((video, idx) => (
+              <motion.div 
+                key={video.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                onClick={() => setLightboxIndex(photos.length + idx)}
+                className="group relative aspect-video rounded-2xl overflow-hidden cursor-pointer border border-[#E5E5E5] shadow-sm"
+              >
+                <img 
+                  src={video.thumbnail} 
+                  alt={video.title} 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/20 transition-all">
+                  <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center text-brand-primary shadow-2xl group-hover:scale-110 transition-transform">
+                    <Play size={32} fill="currentColor" />
+                  </div>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                  <p className="text-white font-bold text-sm">{video.title}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Section: TAJERMY Catalogue 2026 */}
+      <section id="catalogue" className="py-24 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row items-center gap-12">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="w-full md:w-1/2"
+            >
+              <div 
+                className="relative aspect-[3/4] max-w-sm mx-auto rounded-3xl overflow-hidden shadow-2xl cursor-pointer group"
+                onClick={() => setCatalogueOpen(true)}
+              >
+                <img 
+                  src="https://ducphuongmedical.com/hinhanh/XuatKhau/poster6.jpg" 
+                  alt="TAJERMY Catalogue 2026 Cover" 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <div className="bg-white/20 backdrop-blur-md p-6 rounded-full border border-white/30 text-white">
+                    <FileText size={48} />
+                  </div>
+                </div>
+                <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur p-4 rounded-2xl shadow-lg">
+                  <div className="text-brand-primary font-bold text-lg mb-1">{t.gallery.catalogueTitle}</div>
+                  <div className="text-brand-muted text-xs uppercase tracking-widest font-bold">2026 Edition</div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="w-full md:w-1/2 space-y-8"
+            >
+              <div>
+                <span className="inline-block px-4 py-1.5 rounded-full bg-brand-light text-brand-primary text-xs font-bold uppercase tracking-widest mb-6">
+                  Corporate Profile
+                </span>
+                <h2 className="text-4xl font-bold tracking-tight mb-6 leading-tight">
+                  {t.gallery.catalogueTitle}
+                </h2>
+                <p className="text-brand-muted leading-relaxed text-lg">
+                  {t.gallery.catalogueSubtitle}
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-4">
+                <button 
+                  onClick={() => setCatalogueOpen(true)}
+                  className="inline-flex items-center gap-2 bg-brand-primary text-white px-8 py-4 rounded-2xl font-bold hover:bg-brand-accent transition-all shadow-lg hover:shadow-brand-primary/20 active:scale-95"
+                >
+                  <Eye size={20} /> {t.gallery.viewCatalogue}
+                </button>
+                <a 
+                  href="https://ducphuongmedical.com/hinhanh/Catalogue/TAJERMY_Catalogue_2026.pdf" 
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 bg-white border-2 border-brand-border text-brand-ink px-8 py-4 rounded-2xl font-bold hover:bg-brand-light transition-all active:scale-95"
+                >
+                  <Download size={20} /> Download PDF
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
       {/* Section: Giới Thiệu (About Us) */}
       <section id="about" className="py-16 md:py-24 px-4 md:px-12 lg:px-24 bg-white">
@@ -1373,92 +1485,38 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* Section: Photo - Video Gallery */}
-      <section id="gallery" className="py-24 px-6 bg-[#F9FAFB]">
+      {/* Section: Photo Gallery */}
+      <section id="photo-gallery" className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-            <div>
-              <h2 className="text-4xl font-bold tracking-tight mb-4">{t.gallery.title}</h2>
-              <p className="text-brand-muted max-w-2xl">{t.gallery.subtitle}</p>
-            </div>
-            <div className="flex bg-white p-1 rounded-xl border border-brand-border shadow-sm">
-              <button 
-                onClick={() => setActiveTab("photos")}
-                className={`px-6 py-2 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${activeTab === "photos" ? "bg-brand-primary text-white shadow-lg" : "text-brand-faint hover:text-brand-ink"}`}
-              >
-                <ImageIcon size={18} /> {t.gallery.photos}
-              </button>
-              <button 
-                onClick={() => setActiveTab("videos")}
-                className={`px-6 py-2 rounded-lg text-sm font-bold transition-all flex items-center gap-2 ${activeTab === "videos" ? "bg-brand-primary text-white shadow-lg" : "text-brand-faint hover:text-brand-ink"}`}
-              >
-                <VideoIcon size={18} /> {t.gallery.videos}
-              </button>
-            </div>
+          <div className="mb-16">
+            <h2 className="text-4xl font-bold tracking-tight mb-4">{t.gallery.photoTitle}</h2>
+            <p className="text-brand-muted max-w-2xl">{t.gallery.subtitle}</p>
           </div>
 
-          <AnimatePresence mode="wait">
-            {activeTab === "photos" ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {photos.map((photo, idx) => (
               <motion.div 
-                key="photos"
+                key={photo.id}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                onClick={() => setLightboxIndex(idx)}
+                className="group relative aspect-square rounded-2xl overflow-hidden cursor-zoom-in border border-[#E5E5E5] shadow-sm"
               >
-                {photos.map((photo, idx) => (
-                  <div 
-                    key={photo.id}
-                    onClick={() => setLightboxIndex(idx)}
-                    className="group relative aspect-square rounded-2xl overflow-hidden cursor-zoom-in border border-[#E5E5E5] shadow-sm"
-                  >
-                    <img 
-                      src={photo.url} 
-                      alt={photo.title} 
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      referrerPolicy="no-referrer"
-                    />
-                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <div className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center text-brand-primary shadow-lg">
-                        <Plus size={20} />
-                      </div>
-                    </div>
+                <img 
+                  src={photo.url} 
+                  alt={photo.title} 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <div className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center text-brand-primary shadow-lg">
+                    <Plus size={20} />
                   </div>
-                ))}
+                </div>
               </motion.div>
-            ) : (
-              <motion.div 
-                key="videos"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-              >
-                {videos.map((video, idx) => (
-                  <div 
-                    key={video.id}
-                    onClick={() => setLightboxIndex(photos.length + idx)}
-                    className="group relative aspect-video rounded-2xl overflow-hidden cursor-pointer border border-[#E5E5E5] shadow-sm"
-                  >
-                    <img 
-                      src={video.thumbnail} 
-                      alt={video.title} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      referrerPolicy="no-referrer"
-                    />
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center group-hover:bg-black/20 transition-all">
-                      <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center text-brand-primary shadow-2xl group-hover:scale-110 transition-transform">
-                        <Play size={32} fill="currentColor" />
-                      </div>
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                      <p className="text-white font-bold text-sm">{video.title}</p>
-                    </div>
-                  </div>
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -1523,6 +1581,32 @@ export default function App() {
           autoPlay: true,
           controls: true,
           playsInline: true,
+        }}
+      />
+
+      {/* Catalogue Lightbox */}
+      <Lightbox
+        open={catalogueOpen}
+        close={() => setCatalogueOpen(false)}
+        slides={[{ type: "pdf", src: "https://ducphuongmedical.com/hinhanh/Catalogue/TAJERMY_Catalogue_2026.pdf" } as any]}
+        render={{
+          slide: ({ slide }) => {
+            if ((slide as any).type === "pdf") {
+              const pdfUrl = (slide as any).src;
+              const viewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(pdfUrl)}&embedded=true`;
+              return (
+                <div className="w-full h-full flex items-center justify-center p-2 md:p-12">
+                  <iframe
+                    className="w-full h-full max-w-6xl bg-white rounded-xl shadow-2xl"
+                    src={viewerUrl}
+                    title="TAJERMY Catalogue 2026"
+                    frameBorder="0"
+                  />
+                </div>
+              );
+            }
+            return undefined;
+          }
         }}
       />
 

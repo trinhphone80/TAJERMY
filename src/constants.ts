@@ -33,4 +33,5 @@ export const INITIAL_PHOTOS: Photo[] = [
 
 export const INITIAL_VIDEOS: Video[] = [
   { id: "v1", url: "https://www.youtube.com/watch?v=DSbs2op6wMw", thumbnail: "https://img.youtube.com/vi/DSbs2op6wMw/hqdefault.jpg", title: "TAJERMY Introduction" },
+  { id: "v2", url: "https://www.youtube.com/watch?v=Qs0VpHD2XrM", thumbnail: "https://img.youtube.com/vi/Qs0VpHD2XrM/hqdefault.jpg", title: "TAJERMY Global Export" },
 ];
