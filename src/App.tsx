@@ -793,8 +793,8 @@ export default function App() {
               className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl bg-black group"
             >
               <iframe 
-                src="https://www.youtube.com/embed/DSbs2op6wMw?autoplay=0&rel=0" 
-                title="TAJERMY Introduction Video"
+                src="https://www.youtube.com/embed/_i8YWdwW0RA?autoplay=0&rel=0" 
+                title="TAJERMY Premium Cashew Production"
                 className="absolute inset-0 w-full h-full border-0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowFullScreen
